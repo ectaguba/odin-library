@@ -6,12 +6,19 @@ let myLibrary = [
 // Obtain Elements
 const addBtn = document.querySelector("#add-book");
 const modalContainer = document.querySelector("#modal-container");
+const modal = document.querySelector("#modal")
 const submitBtn = document.querySelector("#submit");
 // const readBtn = document.querySelector("#read-button");
 // const removeBtn = document.querySelector("#remove-button")
 
-
 addBtn.addEventListener('click', inputBook);
+document.addEventListener('click', function isClickedOutsideForm(event) {
+    // Click outside form a.k.a on the container
+    if (event.target == modalContainer) {
+        modalContainer.style.opacity = "0";
+        modalContainer.style.pointerEvents = "none";
+    }
+});
 
 function Book(title = "No title", author = "Unknown author", pages = "x", read = false) {
     this.title = title;
