@@ -1,0 +1,83 @@
+:root {
+    font-size: 18px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', 'Arial';
+}
+
+html {
+    box-sizing: border-box;
+    background-color: #DDDDDD;
+}
+
+#header {
+    text-align: center;
+    padding: 2rem;
+}
+
+#add-book {
+    display: flex;
+    margin: auto;
+    background-color: white;
+    padding: .5rem 1rem;
+    font-size: 18px;
+    transition: 0.15s;
+    border-radius: 10px;
+}
+
+#add-book:hover {
+    transform: scale(1.05, 1.05)
+}
+
+#library {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  
+    gap: 1rem;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem 0;
+}
+
+#book-buttons {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+#book-buttons button {
+    width: 100%;
+    font-size: 18px;
+    margin: 0rem 1rem;
+    padding: .5rem 4rem;
+    border-radius: 10px;
+    transition: 0.15s;
+}
+
+#book-buttons button:hover {
+    transform: scale(1.03, 1.03);
+}
+
+#read-button {
+    background-color: lightcoral;
+}
+
+#remove-button {
+    background-color: #dddddd;
+}
