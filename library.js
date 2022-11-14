@@ -1,4 +1,7 @@
-let myLibrary = []
+// Array of objects
+let myLibrary = [
+
+]
 
 function Book(title = "No title", author = "Unknown author", pages = "x", read = false) {
     this.title = title;
@@ -16,9 +19,10 @@ let hobbit = new Book()
 console.log(hobbit.info())
 
 function addBook(book) {
+
     myLibrary.append(book);
 }
 
 function displayBooks() {
-    
+
 }

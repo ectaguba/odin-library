@@ -9,52 +9,23 @@
     <h1 id="header">LIBRARY</h1>
 </head>
 <body>
-    <button id="add-book">Add Book</button>
+    <button id="add-book-button">Add Book</button>
     <div id="library">
-        <div class="book-card">
-            <h2>Title</h2>
-            <h4><i>Author</i></h4>
-            <p>pages</p>
-            <div id="book-buttons">
-                <button id="read-button">Not Read</button>
-                <button id="remove-button">Remove</button>
-            </div>
-        </div>
-        <div class="book-card">
-            <h2>Title</h2>
-            <h4><i>Author</i></h4>
-            <p>pages</p>
-            <div id="book-buttons">
-                <button id="read-button">Not Read</button>
-                <button id="remove-button">Remove</button>
-            </div>
-        </div>
-        <div class="book-card">
-            <h2>Title</h2>
-            <h4><i>Author</i></h4>
-            <p>pages</p>
-            <div id="book-buttons">
-                <button id="read-button">Not Read</button>
-                <button id="remove-button">Remove</button>
-            </div>
-        </div>
-        <div class="book-card">
-            <h2>Title</h2>
-            <h4><i>Author</i></h4>
-            <p>pages</p>
-            <div id="book-buttons">
-                <button id="read-button">Not Read</button>
-                <button id="remove-button">Remove</button>
-            </div>
-        </div>
-        <div class="book-card">
-            <h2>Title</h2>
-            <h4><i>Author</i></h4>
-            <p>pages</p>
-            <div id="book-buttons">
-                <button id="read-button">Not Read</button>
-                <button id="remove-button">Remove</button>
-            </div>
+    </div>
+    
+    <div class="modal-container" id="modal-container">
+        <div id="modal">
+            <form id="modal-form">
+                <h2>Add new book</h2>
+                <input type="text" id="title" placeholder="Title" required="" maxlength="100">
+                <input type="text" id="author" placeholder="Author" required="" maxlength="100">
+                <input type="number" id="pages" placeholder="Pages" required="" max="10000">
+                <div class="read">
+                    <label for="read-checkbox">Have you read it?</label>
+                    <input type="checkbox" id="read-checkbox">
+                </div> 
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
         </div>
     </div>
     <script src="library.js"></script>
