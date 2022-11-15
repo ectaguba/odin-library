@@ -52,33 +52,32 @@ html {
     padding: 2rem 0;
 }
 
-#book-buttons {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 1rem;
+
+.book-card > h4 {
+    font-style: italic;
 }
 
-#book-buttons button {
-    width: 100%;
+.book-card > button {
+    width: 90%;
     font-size: 18px;
-    margin: 0rem 1rem;
     padding: .5rem 4rem;
     border-radius: 10px;
     transition: 0.15s;
 }
 
-#book-buttons button:hover {
+.book-card > button:hover {
     transform: scale(1.03, 1.03);
 }
 
-#read-button {
+.read-button {
     background-color: lightcoral;
 }
 
-#remove-button {
+.read-button.active {
+    background-color: lightgreen;
+}
+
+.remove-button {
     background-color: #dddddd;
 }
 
@@ -135,7 +134,7 @@ html {
     margin: auto;
 }
 
-#read-checkbox {
+#is-read {
     margin-left: .5rem;
     transform: scale(1.3, 1.3);
 }
