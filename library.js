@@ -68,34 +68,29 @@ function displayBook(book) {
     const newPages = document.createElement ("p");
     newPages.textContent = pagesVal;
 
-    const cardBtns = document.createElement("div");
-    cardBtns.classList.add('book-buttons');
+    const readBtn = document.createElement("button");
+    readBtn.classList.add('read-button');
+    readBtn.addEventListener('click', setRead)
+    
+    if (readVal) {
+        readBtn.classList.add('active');
+        readBtn.textContent = "Read";
+    } else {
+        readBtn.textContent = "Not Read";
+    }
 
-        const readBtn = document.createElement("button");
-        readBtn.classList.add('read-button');
-        readBtn.addEventListener('click', setRead)
-        
-        if (readVal) {
-            readBtn.classList.add('active');
-            readBtn.textContent = "Read";
-        } else {
-            readBtn.textContent = "Not Read";
-        }
-
-        const removeBtn = document.createElement("button");
-        removeBtn.classList.add('remove-button');
-        removeBtn.addEventListener('click', removeBook);
-        removeBtn.textContent = "Remove Book";
-        
-        cardBtns.appendChild(readBtn);
-        cardBtns.appendChild(removeBtn);
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add('remove-button');
+    removeBtn.addEventListener('click', removeBook);
+    removeBtn.textContent = "Remove Book";
     
     const newCard = document.createElement("div");
     newCard.classList.add("book-card");
     newCard.appendChild(newTitle);
     newCard.appendChild(newAuthor);
     newCard.appendChild(newPages);
-    newCard.appendChild(cardBtns);
+    newCard.appendChild(readBtn);
+    newCard.appendChild(removeBtn);
 
     library.appendChild(newCard);
 }
@@ -106,7 +101,7 @@ function setRead() {
 }
 
 function removeBook() {
-    
+
 }
 // remove book from DOM and library
     // NodeList = myLibrary array of objects
