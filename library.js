@@ -101,7 +101,13 @@ function displayBook(book) {
 }
 
 // set read status 
+function setRead() {
 
+}
+
+function removeBook() {
+    
+}
 // remove book from DOM and library
     // NodeList = myLibrary array of objects
 
