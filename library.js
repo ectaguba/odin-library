@@ -156,7 +156,7 @@ function addBookCard(bookObj) {
     libraryDOM.appendChild(newCard);
 }
 
-// Functions for modifying book and library
+// Mutator functions for modifying book and library
 // IMPORTANT: Book title connects the DOM to the myLibrary.books array
 function obtainTitleFromButton(b) {
     return b.parentNode.querySelector(".book-title").textContent;
@@ -165,8 +165,9 @@ function obtainTitleFromButton(b) {
 function setRead(e) {
     const button = e.target;
     const title = obtainTitleFromButton(button);
-    myLibrary.setRead(title);
+    myLibrary.setRead(title); // Array
 
+    // DOM
     if (button.classList.contains('active')) {
         button.classList.remove('active');
         button.textContent = "Not Read";
@@ -179,6 +180,6 @@ function setRead(e) {
 function removeBook(e) {
     const button = e.target;
     const title = obtainTitleFromButton(button);
-    myLibrary.removeBook(title);
-    button.parentNode.remove(); // child button -> parent div
+    myLibrary.removeBook(title); // Array
+    button.parentNode.remove(); // DOM: child button -> parent div
 }
