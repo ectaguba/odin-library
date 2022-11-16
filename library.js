@@ -63,7 +63,7 @@ const reqInputs = document.querySelectorAll("input[required]")
 const submitBtn = document.querySelector("#submit-button");
 const libraryDOM = document.querySelector("#library");
 
-
+console.log(reqInputs)
 // Modal Functions
 addBtn.addEventListener('click', function openModal() {
     modalContainer.style.opacity = "100";
@@ -97,11 +97,15 @@ function getBookFromInputs() {
 }
 
 function submitBook() {
+    // Validate Inputs
+    for (let i = 0; i < reqInputs.length; i++) {
+        if (!reqInputs[i].value) return;
+    }
     // Send objects to DOM and arrays
     const book = getBookFromInputs(); 
     addBookCard(book);
     myLibrary.addBook(book);
-
+    // Reset Inputs
     setTimeout( () => resetInputs(), 500);;
 }
 
