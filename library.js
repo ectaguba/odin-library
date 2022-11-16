@@ -1,25 +1,12 @@
-// Array of objects
-let myLibrary = []
+// Data Structures
+class Book {
+    constructor(
+        title = "No title", 
+        author = "Unknown author", 
+        pages = "x", 
+        read = false
+    ) {
 
-// Obtain Elements
-const addBtn = document.querySelector("#add-book");
-const modalContainer = document.querySelector("#modal-container");
-const modal = document.querySelector("#modal")
-const reqInputs = document.querySelectorAll("input[required]")
-const submitBtn = document.querySelector("#submit");
-const library = document.querySelector("#library");
-
-addBtn.addEventListener('click', openModal);
-document.addEventListener('click', function isClickedOutsideForm(event) {
-    // Click outside form a.k.a on the container
-    if (event.target == modalContainer) {
-        modalContainer.style.opacity = "0";
-        modalContainer.style.pointerEvents = "none";
-    }
-});
-submitBtn.addEventListener('click', addBook);
-
-function Book(title = "No title", author = "Unknown author", pages = "x", read = false) {
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -28,38 +15,108 @@ function Book(title = "No title", author = "Unknown author", pages = "x", read =
     this.info = () => {
         return (this.read) ? `${title} by ${author}, ${pages} pages, read` : `${title} by ${author}, ${pages} pages, not read yet`
     }
+    
+    }
 }
 
-function openModal() {
+class Library {
+    constructor() {
+        this.books = [];
+    }
+    
+    addBook(newBook) {
+        this.books.push(newBook);
+    }
+
+    removeBook(title) {
+        this.books = this.books.filter( (book) => book.title !== title);
+    }
+
+    getBook(title) {
+        return this.books.find( (book) => book.title == title);
+    }
+
+    setRead(title){
+        this.books.forEach( (book) => {
+            if (book.title == title) {
+                if (book.read) {
+                    book.read = false
+                } else {
+                    book.read = true;
+                }
+            }
+        });
+    }
+
+    isInLibrary(title) {
+        return this.books.includes(title);
+    }
+}
+
+const myLibrary = new Library();
+
+// Obtain Elements
+const addBtn = document.querySelector("#add-book");
+const modalContainer = document.querySelector("#modal-container");
+const modal = document.querySelector("#modal")
+const reqInputs = document.querySelectorAll("input[required]")
+const submitBtn = document.querySelector("#submit-button");
+const libraryDOM = document.querySelector("#library");
+
+
+// Modal Functions
+addBtn.addEventListener('click', function openModal() {
     modalContainer.style.opacity = "100";
     modalContainer.style.pointerEvents = "auto";
-}
+});
 
-function addBook() {   
-    // validate inputs 
+document.addEventListener('click', function isClickedOutsideForm(event) {
+    // Click outside form a.k.a on the container
+    if (event.target == modalContainer) {
+        // Remove Modal
+        modalContainer.style.opacity = "0";
+        modalContainer.style.pointerEvents = "none";
+    }
+});
+submitBtn.addEventListener('click', submitBook);
 
+// Submit book functions
+
+function getBookFromInputs() {   
     // close modal
     modalContainer.style.opacity = "0";
     modalContainer.style.pointerEvents = "none";
     // get text from input value attribute
-    titleInput = document.querySelector("#title").value;
-    authorInput = document.querySelector("#author").value;
-    numberInput = document.querySelector("#pages").value;
+    titleInput = document.querySelector("#title-input").value;
+    authorInput = document.querySelector("#author-input").value;
+    numberInput = document.querySelector("#pages-input").value;
     readInput = document.querySelector("#is-read").checked;
     // create new book object
-    let newBook = new Book(titleInput, authorInput, numberInput, readInput)
-    // add to array
-    myLibrary.push(newBook);
-    // Display and reset
-    displayBook(newBook);
-    resetInputs();
+    const newBook = new Book(titleInput, authorInput, numberInput, readInput);
+    return newBook;
 }
 
-function displayBook(book) {
-    // create, add, append
+function submitBook() {
+    // Send objects to DOM and arrays
+    const book = getBookFromInputs(); 
+    addBookCard(book);
+    myLibrary.addBook(book);
 
-    const { title: titleVal, author: authorVal, pages: pagesVal, read: readVal } = book
+    setTimeout( () => resetInputs(), 500);;
+}
+
+function resetInputs() {
+    reqInputs.forEach( (input) => {
+        input.value = "";
+    });
+    document.querySelector("#is-read").checked = false;
+}
+
+function addBookCard(bookObj) {
+    // create, add, append
+    const { title: titleVal, author: authorVal, pages: pagesVal, read: readVal } = bookObj
     const newTitle = document.createElement("h2");
+    newTitle.classList.add('book-title');
     newTitle.textContent = titleVal;
 
     const newAuthor = document.createElement("h4");
@@ -92,23 +149,32 @@ function displayBook(book) {
     newCard.appendChild(readBtn);
     newCard.appendChild(removeBtn);
 
-    library.appendChild(newCard);
+    libraryDOM.appendChild(newCard);
 }
 
-// set read status 
-function setRead() {
-
+// Functions for modifying book and library
+// IMPORTANT: Book title connects the DOM to the myLibrary.books array
+function obtainTitleFromButton(b) {
+    return b.parentNode.querySelector(".book-title").textContent;
 }
 
-function removeBook() {
+function setRead(e) {
+    const button = e.target;
+    const title = obtainTitleFromButton(button);
+    myLibrary.setRead(title);
 
+    if (button.classList.contains('active')) {
+        button.classList.remove('active');
+        button.textContent = "Not Read";
+    } else {
+        button.classList.add('active');
+        button.textContent = "Read";
+    }
 }
-// remove book from DOM and library
-    // NodeList = myLibrary array of objects
 
-function resetInputs() {
-    reqInputs.forEach( (input) => {
-        setTimeout( () => input.value = "", 500);
-    });
-    setTimeout( () => document.querySelector("#is-read").checked = false, 500);
+function removeBook(e) {
+    const button = e.target;
+    const title = obtainTitleFromButton(button);
+    myLibrary.removeBook(title);
+    button.parentNode.remove(); // child button -> parent div
 }
